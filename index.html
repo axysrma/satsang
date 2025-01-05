@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Website</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        .section {
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background: #fff;
+        }
+        .section-header {
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .section-content {
+            display: none;
+            padding: 10px;
+        }
+        .toggle-button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #add-section {
+            margin-top: 20px;
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Interactive Website</h1>
+    <div id="sections-container">
+        <!-- Sections will be dynamically added here -->
+        <div class="section">
+            <div class="section-header">
+                <span>Sample Section</span>
+                <button class="toggle-button">+</button>
+            </div>
+            <div class="section-content">
+                <p>This is a sample section content.</p>
+            </div>
+        </div>
+    </div>
+    <button id="add-section">Add New Section</button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sectionsContainer = document.getElementById('sections-container');
+            const addSectionButton = document.getElementById('add-section');
+
+            // Toggle content visibility
+            sectionsContainer.addEventListener('click', function(event) {
+                if (event.target.classList.contains('toggle-button')) {
+                    const content = event.target.parentElement.nextElementSibling;
+                    const isVisible = content.style.display === 'block';
+                    content.style.display = isVisible ? 'none' : 'block';
+                    event.target.textContent = isVisible ? '+' : '-';
+                }
+            });
+
+            // Add new section
+            addSectionButton.addEventListener('click', function() {
+                const newSection = document.createElement('div');
+                newSection.className = 'section';
+
+                newSection.innerHTML = `
+                    <div class="section-header">
+                        <span>New Section</span>
+                        <button class="toggle-button">+</button>
+                    </div>
+                    <div class="section-content">
+                        <p>Content for the new section.</p>
+                    </div>
+                `;
+
+                sectionsContainer.appendChild(newSection);
+            });
+        });
+    </script>
+</body>
+</html>
